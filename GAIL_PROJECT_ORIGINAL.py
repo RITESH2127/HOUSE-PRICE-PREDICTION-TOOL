@@ -1,45 +1,23 @@
 import pandas as pd
 import numpy as np
 
-# Load the Boston housing dataset - use scikit-learn's built-in version or create synthetic data
-try:
-    from sklearn.datasets import load_boston
-    # Try loading from sklearn (deprecated in newer versions)
-    data = load_boston()
-    X = pd.DataFrame(data.data, columns=data.feature_names)
-    y = pd.Series(data.target, name="MEDV")
-    print("Loaded Boston housing dataset from scikit-learn")
-except ImportError:
-    print("Boston dataset not available, creating synthetic dataset...")
-    # Create completely synthetic data that matches the expected structure
-    np.random.seed(42)
-    n_samples = 506
-    
-    X = pd.DataFrame({
-        'CRIM': np.random.exponential(3, n_samples),
-        'ZN': np.random.uniform(0, 100, n_samples),
-        'INDUS': np.random.uniform(0.5, 27, n_samples),
-        'CHAS': np.random.choice([0, 1], n_samples, p=[0.9, 0.1]),
-        'NOX': np.random.uniform(0.3, 0.9, n_samples),
-        'RM': np.random.normal(6.3, 0.7, n_samples),
-        'AGE': np.random.uniform(2, 100, n_samples),
-        'DIS': np.random.uniform(1, 13, n_samples),
-        'RAD': np.random.uniform(1, 24, n_samples),
-        'TAX': np.random.uniform(187, 711, n_samples),
-        'PTRATIO': np.random.uniform(12, 22, n_samples),
-        'B': np.random.uniform(0, 400, n_samples),
-        'LSTAT': np.random.uniform(1, 38, n_samples)
-    })
-    
-    # Create synthetic target based on realistic relationships
-    y = pd.Series(
-        (X['RM'] * 10 - X['CRIM'] * 2 - X['LSTAT'] * 0.5 + 
-         (X['CHAS'] * 5) - X['AGE'] * 0.1 + np.random.normal(0, 2, n_samples)),
-        name="MEDV"
-    )
-    y = np.maximum(y, 5)  # Ensure positive house prices
+# Load the Boston housing dataset directly from CMU’s server
+url = "http://lib.stat.cmu.edu/datasets/boston"
+raw = pd.read_csv(url, sep="\s+", skiprows=22, header=None)
+
+# Reshape the dataset into features and target
+X_data = np.hstack([raw.values[::2, :], raw.values[1::2, :2]])
+y_data = raw.values[1::2, 2]
+
+# Feature names from the dataset documentation
+cols = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
+        'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+
+X = pd.DataFrame(X_data, columns=cols)
+y = pd.Series(y_data, name="MEDV")
 
 # Train / Test Split
+
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -49,12 +27,14 @@ X_train, X_test, y_train, y_test = train_test_split(
 print("Training data shape:", X_train.shape)
 print("Testing data shape:", X_test.shape)
 
+
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.svm import SVR
+
 
 model_dict = {
     "LinearReg": LinearRegression(),
@@ -72,11 +52,13 @@ pipelines = {
     for name, model in model_dict.items()
 }
 
+
 trained_models = {}
 for name, pipe in pipelines.items():
     pipe.fit(X_train, y_train)
     trained_models[name] = pipe
     print(f"{name} trained.")
+
 
 from sklearn.metrics import mean_squared_error, r2_score
 
@@ -92,6 +74,7 @@ for name, pipe in trained_models.items():
 best_model = min(results, key=lambda k: results[k]["MSE"])
 print("\nBest model:", best_model)
 print("Metrics:", results[best_model])
+
 
 import joblib
 
