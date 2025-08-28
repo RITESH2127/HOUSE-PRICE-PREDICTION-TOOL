@@ -3,7 +3,11 @@ import joblib
 import pandas as pd
 
 # Show GAIL logo centered and large at the top
-st.image(r"C:\Users\vishaljeet\Pictures\Camera Roll\py\GAIL.svg.png", width=250)
+try:
+    st.image("GAIL.svg.png", width=250)
+except:
+    # If logo not found, just show the title
+    pass
 
 # Title and subtitle with styling
 st.markdown(
@@ -17,9 +21,9 @@ st.markdown(
 
 # Load the saved best model pipeline
 try:
-    pipeline = joblib.load(r'C:\Users\vishaljeet\Pictures\Camera Roll\py\best_model.pkl')
+    pipeline = joblib.load('best_model.pkl')
 except FileNotFoundError:
-    st.error("Error: 'best_model.pkl' not found. Please ensure the best model is saved.")
+    st.error("Error: 'best_model.pkl' not found. Please ensure the best model is saved by running GAIL_PROJECT.py first.")
     st.stop()
 
 # Card-like input area (only around the input fields)
