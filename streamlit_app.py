@@ -109,6 +109,8 @@ with outer_col2:
                                   columns=['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT'])
         try:
             predicted_price = pipeline.predict(input_data)[0]
-            st.success(f"The predicted house price (in $1000) is: ${predicted_price:.2f}")
+            final_price = predicted_price*1000
+            st.success(f"The predicted house price is: ${final_price:.6f}")
         except Exception as e:
+
             st.error(f"An error occurred during prediction: {e}")
