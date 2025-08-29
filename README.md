@@ -52,7 +52,7 @@ A preliminary analysis was conducted to understand the dataset's characteristics
 
 ![image alt](https://github.com/RITESH2127/HOUSE-PRICE-PREDICTION-TOOL/blob/main/Figure_1.png?raw=true)
 
-## Data Preprocessing & Feature Engineering
+##  Data Preprocessing & Feature Engineering
 
 To prepare the data for modeling, the following steps were taken, as implemented in `main.py`:
 1.  **Train-Test Split**: The dataset was split into training (80%) and testing (20%) sets using `train_test_split` to ensure unbiased model evaluation.
