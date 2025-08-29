@@ -1,5 +1,7 @@
 # Boston House Price Prediction: A Machine Learning Approach
-![GAIL](https://github.com/RITESH2127/HOUSE-PRICE-PREDICTION-TOOL/blob/main/GAIL.svg.png?raw=true)
+
+<img src="https://github.com/RITESH2127/HOUSE-PRICE-PREDICTION-TOOL/blob/main/GAIL.svg.png?raw=true" alt="GAIL" width="100" height="100"/>
+
 This repository contains the source code, analysis, and documentation for a machine learning project aimed at predicting Boston house prices. This project was undertaken as part of the summer training program with GAIL (India) Limited. It covers the entire machine learning lifecycle from data exploration and preprocessing to model training, evaluation, and deployment as an interactive web application.
 
 ## Table of Contents
@@ -98,18 +100,12 @@ The best-performing model (`RandomForestRegressor`) is deployed in an interactiv
 *   Displays the predicted price in thousands of dollars.
 
 ## Project Structure
-├── best_model.pkl 
-# Serialized best performing model pipeline 
-├── main.py 
-# Main script for training, evaluation, and model saving 
-├── notebook_RITESH.ipynb 
-# Jupyter Notebook for initial exploration and analysis 
-├── readme.md 
-# This documentation file 
-├── results.csv 
-# CSV file containing model performance metrics 
-└── streamlit_app.py 
-# Script for the Streamlit web application
+├── best_model.pkl # Serialized best performing model pipeline 
+├── main.py # Main script for training, evaluation, and model saving 
+├── notebook_RITESH.ipynb # Jupyter Notebook for initial exploration and analysis 
+├── readme.md # This documentation file 
+├── results.csv # CSV file containing model performance metrics 
+└── streamlit_app.py # Script for the Streamlit web application
 
 ## Setup and Instructions to Run
 
