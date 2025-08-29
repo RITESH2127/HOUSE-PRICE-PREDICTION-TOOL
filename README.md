@@ -101,10 +101,15 @@ The best-performing model (`RandomForestRegressor`) is deployed in an interactiv
 
 ## Project Structure
 ├── best_model.pkl # Serialized best performing model pipeline 
+
 ├── main.py # Main script for training, evaluation, and model saving 
+
 ├── notebook_RITESH.ipynb # Jupyter Notebook for initial exploration and analysis 
+
 ├── readme.md # This documentation file 
+
 ├── results.csv # CSV file containing model performance metrics 
+
 └── streamlit_app.py # Script for the Streamlit web application
 
 ## Setup and Instructions to Run
